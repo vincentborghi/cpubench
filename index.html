@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -240,19 +240,19 @@
       font-weight: 700;
     }
 
-    /* Selection Bar */
+        /* View Mode & Filter Bar */
     .selection-bar {
       display: flex;
       flex-wrap: wrap;
       align-items: center;
       justify-content: space-between;
       gap: 10px;
-      padding: 8px 14px;
+      padding: 10px 14px;
       background: #ffffff;
       border: 1px solid #cbd5e1;
       border-radius: 8px;
-      margin-bottom: 8px;
-      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+      margin-bottom: 12px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
     }
     .selection-bar-left {
       display: flex;
@@ -260,189 +260,187 @@
       align-items: center;
       gap: 8px;
     }
-    .selection-bar-title {
-      font-size: 0.84rem;
-      font-weight: 700;
-      color: #1e293b;
-      margin-right: 4px;
-    }
-    .sel-btn {
-      background: #f1f5f9;
-      border: 1px solid #cbd5e1;
-      color: #334155;
-      font-size: 0.78rem;
-      font-weight: 600;
-      padding: 5px 10px;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: all 0.15s ease;
+    .view-mode-group {
       display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .sel-btn:hover {
-      background: #e2e8f0;
-      color: #0f172a;
-    }
-    .sel-btn.active-intel {
-      background: #0284c7;
-      border-color: #0369a1;
-      color: #ffffff;
-      box-shadow: 0 1px 2px rgba(2, 132, 199, 0.3);
-    }
-    .sel-btn.active-intel:hover {
-      background: #0369a1;
-    }
-    .sel-btn.active-amd {
-      background: #dc2626;
-      border-color: #b91c1c;
-      color: #ffffff;
-      box-shadow: 0 1px 2px rgba(220, 38, 38, 0.3);
-    }
-    .sel-btn.active-amd:hover {
-      background: #b91c1c;
-    }
-    .sel-btn.active-w11 {
-      background: #16a34a;
-      border-color: #15803d;
-      color: #ffffff;
-      box-shadow: 0 1px 2px rgba(22, 163, 74, 0.3);
-    }
-    .sel-btn.active-w11:hover {
-      background: #15803d;
-    }
-    .sel-btn.active-ddr4 {
-      background: #2563eb;
-      border-color: #1d4ed8;
-      color: #ffffff;
-      box-shadow: 0 1px 2px rgba(37, 99, 235, 0.3);
-    }
-    .sel-btn.active-ddr4:hover {
-      background: #1d4ed8;
-    }
-    .sel-btn.active-ddr5 {
-      background: #7c3aed;
-      border-color: #6d28d9;
-      color: #ffffff;
-      box-shadow: 0 1px 2px rgba(124, 58, 237, 0.3);
-    }
-    .sel-btn.active-ddr5:hover {
-      background: #6d28d9;
-    }
-    .sel-btn.active-power-low {
-      background: #059669;
-      border-color: #047857;
-      color: #ffffff;
-      box-shadow: 0 1px 2px rgba(5, 150, 105, 0.3);
-    }
-    .sel-btn.active-power-low:hover {
-      background: #047857;
-    }
-    .sel-btn.active-power-normal {
-      background: #ea580c;
-      border-color: #c2410c;
-      color: #ffffff;
-      box-shadow: 0 1px 2px rgba(234, 88, 12, 0.3);
-    }
-    .sel-btn.active-power-normal:hover {
-      background: #c2410c;
-    }
-    .selection-counter {
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: #64748b;
-      margin-left: 6px;
-    }
-    .selection-bar-right {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .reset-all-btn {
-      background: #f1f5f9;
-      color: #334155;
+      border-radius: 6px;
+      overflow: hidden;
       border: 1px solid #cbd5e1;
-      font-size: 0.84rem;
-      font-weight: 700;
-      padding: 6px 13px;
-      border-radius: 6px;
+      background: #f1f5f9;
+    }
+    .view-mode-btn {
+      background: transparent;
+      border: none;
+      padding: 6px 12px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: #475569;
       cursor: pointer;
       transition: all 0.15s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 5px;
-    }
-    .reset-all-btn:hover {
-      background: #e2e8f0;
-      border-color: #94a3b8;
-      color: #0f172a;
-    }
-    .reset-all-btn:active {
-      transform: translateY(1px);
-    }
-    .apply-view-btn {
-      background: #0284c7;
-      color: #ffffff;
-      border: 1px solid #0284c7;
-      font-size: 0.84rem;
-      font-weight: 700;
-      padding: 6px 14px;
-      border-radius: 6px;
-      cursor: pointer;
-      transition: all 0.15s ease;
-      box-shadow: 0 1px 2px rgba(2, 132, 199, 0.25);
       display: inline-flex;
       align-items: center;
       gap: 6px;
     }
-    .apply-view-btn:hover {
-      background: #0369a1;
-      border-color: #0369a1;
+    .view-mode-btn:hover {
+      background: #e2e8f0;
+      color: #0f172a;
     }
-    .apply-view-btn.btn-mode-edit {
-      background: #4f46e5;
-      border-color: #4f46e5;
-      box-shadow: 0 1px 2px rgba(79, 70, 229, 0.25);
+    .view-mode-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      font-weight: 700;
     }
-    .apply-view-btn.btn-mode-edit:hover {
-      background: #4338ca;
-      border-color: #4338ca;
+    .view-mode-btn.btn-pinned-only.active {
+      background: #ca8a04;
+      color: #ffffff;
+      box-shadow: 0 1px 3px rgba(202, 138, 4, 0.3);
+    }
+    .view-count {
+      background: rgba(0, 0, 0, 0.12);
+      padding: 1px 6px;
+      border-radius: 10px;
+      font-size: 0.72rem;
+    }
+    .view-mode-btn.active .view-count {
+      background: rgba(255, 255, 255, 0.25);
+    }
+    .filter-divider {
+      width: 1px;
+      height: 22px;
+      background: #e2e8f0;
+      margin: 0 2px;
+    }
+    .filter-pills-group {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      flex-wrap: wrap;
+    }
+    .filter-pill {
+      background: #f8fafc;
+      border: 1px solid #cbd5e1;
+      border-radius: 20px;
+      padding: 4px 10px;
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: #475569;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+    .filter-pill:hover {
+      background: #e2e8f0;
+      color: #0f172a;
+      border-color: #94a3b8;
+    }
+    .filter-pill.active {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #0284c7;
+      box-shadow: 0 1px 2px rgba(2, 132, 199, 0.25);
+    }
+    .filter-pill.active-power-low {
+      background: #047857;
+      border-color: #047857;
+      color: #ffffff;
+    }
+    .filter-pill.active-power-normal {
+      background: #c2410c;
+      border-color: #c2410c;
+      color: #ffffff;
+    }
+    .filter-pill.active-w11 {
+      background: #16a34a;
+      border-color: #16a34a;
+      color: #ffffff;
+    }
+    .filter-pill.active-ddr4 {
+      background: #1d4ed8;
+      border-color: #1d4ed8;
+      color: #ffffff;
+    }
+    .filter-pill.active-ddr5 {
+      background: #7c3aed;
+      border-color: #7c3aed;
+      color: #ffffff;
     }
     .selection-search-group {
       display: inline-flex;
       align-items: center;
-      gap: 5px;
-      margin-left: 6px;
-      padding-left: 8px;
-      border-left: 1px solid #e2e8f0;
+      gap: 6px;
+      background: #ffffff;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 3px 8px;
     }
-    .selection-search-label {
+    .search-icon {
       font-size: 0.8rem;
-      font-weight: 600;
-      color: #475569;
+      opacity: 0.7;
     }
     .selection-search-input {
       font-size: 0.8rem;
-      padding: 4px 8px;
-      border: 1px solid #cbd5e1;
-      border-radius: 5px;
+      border: none;
       outline: none;
-      width: 140px;
-      transition: all 0.15s ease;
-    }
-    .selection-search-input:focus {
-      border-color: #0284c7;
-      box-shadow: 0 0 0 2px rgba(2, 132, 199, 0.15);
+      width: 130px;
     }
     .clear-btn {
-      background: #f1f5f9;
-      border: 1px solid #cbd5e1;
-      color: #334155;
-      padding: 4px 8px;
-      border-radius: 5px;
+      background: transparent;
+      border: none;
+      color: #94a3b8;
       cursor: pointer;
-      font-size: 0.78rem;
-      font-weight: 500;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 0 2px;
+    }
+    .clear-btn:hover {
+      color: #0f172a;
+    }
+    .compare-banner {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #e0f2fe;
+      border: 1px solid #7dd3fc;
+      border-radius: 6px;
+      padding: 4px 10px;
+      font-size: 0.8rem;
+      color: #0369a1;
+      font-weight: 600;
+    }
+    .compare-close-btn {
+      background: #0284c7;
+      color: #ffffff;
+      border: none;
+      border-radius: 4px;
+      padding: 2px 7px;
+      font-size: 0.72rem;
+      cursor: pointer;
+      font-weight: 700;
+      margin-left: 4px;
+    }
+    .compare-close-btn:hover {
+      background: #0369a1;
+    }
+    .row-compare-btn {
+      background: #e0f2fe;
+      border: 1px solid #7dd3fc;
+      border-radius: 4px;
+      padding: 2px 7px;
+      font-size: 0.72rem;
+      cursor: pointer;
+      color: #0369a1;
+      font-weight: 600;
+      flex-shrink: 0;
+      line-height: 1.3;
+      transition: all 0.12s ease;
+    }
+    .row-compare-btn:hover {
+      background: #0284c7;
+      color: #ffffff;
+      border-color: #0284c7;
+    }
+    .row-compare-btn.active {
+      background: #0284c7;
+      color: #ffffff;
+      font-weight: 700;
     }
     .clear-btn:hover {
       background: #e2e8f0;
@@ -923,7 +921,7 @@
 <body>
 
   <h1>cpubench &mdash; CPU Performance Comparison (Mini PCs and Laptops)</h1>
-  <p class="subtitle">Check or uncheck models directly in the histogram, then click <strong>Apply &amp; View</strong> to isolate them (or <strong>Edit Selection</strong> to show all rows again). Multiple Reference CPUs can be pinned (highlighted in yellow, kept visible across all filters). Badges indicate Power Consumption (<span style="color: #047857; font-weight: 700;">⚡ Low Power ≤15W</span> / <span style="color: #c2410c; font-weight: 700;">⚡ Normal Power &gt;15W</span>), RAM support (<span style="color: #1d4ed8; font-weight: 700;">DDR4</span>, <span style="color: #7c3aed; font-weight: 700;">DDR5</span>, <span style="color: #0f766e; font-weight: 700;">DDR4/5</span>) and Windows 11 compatibility (<span style="color: #16a34a; font-weight: 700;">✓ W11</span> / <span style="color: #dc2626; font-weight: 700;">✗ W11</span>). Project by <a href="https://github.com/vincentborghi" target="_blank" rel="noopener" style="color: #0284c7; font-weight: 600; text-decoration: none;">vincentborghi</a>.</p>
+  <p class="subtitle">Compare desktop and laptop CPUs in real-time. <strong>Pin models (📌)</strong> to set comparison baselines that stay permanently visible across all filters. Use <strong>📌 Pinned Only</strong> for a clean baseline dashboard or <strong>⚡ Vs Pinned</strong> on any processor to compare it instantly. Badges indicate Power Consumption (<span style="color: #047857; font-weight: 700;">⚡ Low Power ≤15W</span> / <span style="color: #c2410c; font-weight: 700;">⚡ Normal Power &gt;15W</span>), RAM support (<span style="color: #1d4ed8; font-weight: 700;">DDR4</span>, <span style="color: #7c3aed; font-weight: 700;">DDR5</span>, <span style="color: #0f766e; font-weight: 700;">DDR4/5</span>) and Windows 11 compatibility (<span style="color: #16a34a; font-weight: 700;">✓ W11</span> / <span style="color: #dc2626; font-weight: 700;">✗ W11</span>). Project by <a href="https://github.com/vincentborghi" target="_blank" rel="noopener" style="color: #0284c7; font-weight: 600; text-decoration: none;">vincentborghi</a>.</p>
 
   <div class="toolbar">
     <div class="toolbar-left">
@@ -948,10 +946,10 @@
       </div>
 
       <div class="toolbar-group">
-        <label>Reference CPUs:</label>
+        <label>📌 Pinned Baselines:</label>
         <div class="ref-chips-container" id="refChipsContainer"></div>
         <select id="addRefSelect" class="add-ref-select" onchange="handleAddReferenceCpu(this.value)">
-          <option value="" disabled selected>+ Add Reference CPU...</option>
+          <option value="" disabled selected>+ Pin a CPU...</option>
         </select>
       </div>
     </div>
@@ -1150,11 +1148,9 @@
     // Reference CPUs: default to Intel Processor N150, AMD Ryzen 3 PRO 3200GE, Intel Core i5-1345U and Intel Pentium Silver N6000
     let referenceCpuNames = new Set(["Intel Processor N150", "AMD Ryzen 3 PRO 3200GE", "Intel Core i5-1345U", "Intel Pentium Silver N6000"]);
 
-    // Set of checked CPU names (all checked by default, references always included)
-    let checkedCpuNames = new Set(cpuData.map(c => c.name));
-
-    // Isolated view mode: false = show all rows with checked/dimmed states; true = isolate checked rows only
-    let viewOnlyChecked = false;
+    // View & Compare state
+    let viewMode = "all"; // "all" | "pinnedOnly"
+    let activeCompareCpu = null; // String CPU name if comparing solo vs pinned
 
     // Active selection filter toggle states
     let selFilterBrand = "all"; // "all" | "intel" | "amd"
@@ -1167,16 +1163,19 @@
       return referenceCpuNames.has(cpuName);
     }
 
+    function isPinned(cpuName) {
+      return referenceCpuNames.has(cpuName);
+    }
+
     function toggleReferenceCpu(cpuName) {
       if (referenceCpuNames.has(cpuName)) {
         if (referenceCpuNames.size <= 1) {
-          alert("At least one Reference CPU must remain selected.");
+          alert("At least one Pinned CPU must remain selected.");
           return;
         }
         referenceCpuNames.delete(cpuName);
       } else {
         referenceCpuNames.add(cpuName);
-        checkedCpuNames.add(cpuName);
       }
       updateReferenceUI();
       renderHistogram();
@@ -1184,7 +1183,7 @@
 
     function removeReferenceCpu(cpuName) {
       if (referenceCpuNames.size <= 1) {
-        alert("At least one Reference CPU must remain selected.");
+        alert("At least one Pinned CPU must remain selected.");
         return;
       }
       referenceCpuNames.delete(cpuName);
@@ -1195,47 +1194,68 @@
     function handleAddReferenceCpu(cpuName) {
       if (!cpuName) return;
       referenceCpuNames.add(cpuName);
-      checkedCpuNames.add(cpuName);
       updateReferenceUI();
+      renderHistogram();
+    }
+
+    function setViewMode(mode) {
+      viewMode = mode;
+      activeCompareCpu = null;
+      renderHistogram();
+    }
+
+    function setCompareCpu(cpuName) {
+      if (!cpuName || referenceCpuNames.has(cpuName)) return;
+      activeCompareCpu = cpuName;
+      viewMode = "all";
+      renderHistogram();
+    }
+
+    function clearCompare() {
+      activeCompareCpu = null;
       renderHistogram();
     }
 
     function updateReferenceUI() {
       const container = document.getElementById("refChipsContainer");
-      container.innerHTML = "";
-
-      referenceCpuNames.forEach(name => {
-        const chip = document.createElement("span");
-        chip.className = "ref-chip";
-        chip.innerHTML = `
-          <span class="ref-chip-star">★</span>
-          <span>${name}</span>
-          <button type="button" class="ref-chip-close" onclick="removeReferenceCpu('${name.replace(/'/g, "\\'")}')" title="Remove as reference">✕</button>
-        `;
-        container.appendChild(chip);
-      });
+      if (container) {
+        container.innerHTML = "";
+        referenceCpuNames.forEach(name => {
+          const chip = document.createElement("span");
+          chip.className = "ref-chip";
+          chip.innerHTML = `
+            <span class="ref-chip-star">📌</span>
+            <span>${name}</span>
+            <button type="button" class="ref-chip-close" onclick="removeReferenceCpu('${name.replace(/'/g, "\\'")}')" title="Unpin this model">✕</button>
+          `;
+          container.appendChild(chip);
+        });
+      }
 
       const addSelect = document.getElementById("addRefSelect");
-      addSelect.innerHTML = `<option value="" disabled selected>+ Add Reference CPU...</option>`;
-      const availableCpus = [...cpuData]
-        .filter(c => !referenceCpuNames.has(c.name))
-        .sort((a, b) => a.name.localeCompare(b.name));
+      if (addSelect) {
+        addSelect.innerHTML = `<option value="" disabled selected>+ Pin a CPU...</option>`;
+        const availableCpus = [...cpuData]
+          .filter(c => !referenceCpuNames.has(c.name))
+          .sort((a, b) => a.name.localeCompare(b.name));
 
-      availableCpus.forEach(c => {
-        const opt = document.createElement("option");
-        opt.value = c.name;
-        opt.textContent = c.name;
-        addSelect.appendChild(opt);
-      });
+        availableCpus.forEach(c => {
+          const opt = document.createElement("option");
+          opt.value = c.name;
+          opt.textContent = c.name;
+          addSelect.appendChild(opt);
+        });
+      }
     }
 
-    // Active match state
+    // Active clipboard match state
     let activeMatchQuery = null;
     let activeMatchResult = null;
 
     function clearMatchFilter() {
       activeMatchQuery = null;
       activeMatchResult = null;
+      activeCompareCpu = null;
 
       const badge = document.getElementById("matchFilterBadge");
       if (badge) badge.style.display = "none";
@@ -1243,14 +1263,14 @@
       const filterInput = document.getElementById("filterInput");
       if (filterInput) filterInput.value = "";
 
-      checkedCpuNames = new Set(cpuData.map(c => c.name));
-      viewOnlyChecked = false;
+      viewMode = "all";
       renderHistogram();
       showToast("Match filter cleared. All CPUs restored.", "info");
     }
 
     function clearFilter() {
-      document.getElementById("filterInput").value = "";
+      const filterInput = document.getElementById("filterInput");
+      if (filterInput) filterInput.value = "";
       if (activeMatchQuery) {
         clearMatchFilter();
       } else {
@@ -1258,44 +1278,14 @@
       }
     }
 
-    function selectAllCpus() {
-      activeMatchQuery = null;
-      activeMatchResult = null;
-      const badge = document.getElementById("matchFilterBadge");
-      if (badge) badge.style.display = "none";
-
-      selFilterBrand = "all";
-      selFilterPower = "all";
-      selFilterW11 = false;
-      selFilterDdr4 = false;
-      selFilterDdr5 = false;
-      updateSelectionFilterButtons();
-      checkedCpuNames = new Set(cpuData.map(c => c.name));
-      viewOnlyChecked = false;
-      renderHistogram();
-    }
-
-    function deselectAllCpus() {
-      selFilterBrand = "all";
-      selFilterPower = "all";
-      selFilterW11 = false;
-      selFilterDdr4 = false;
-      selFilterDdr5 = false;
-      updateSelectionFilterButtons();
-      // Keep all Reference CPUs selected
-      checkedCpuNames = new Set(referenceCpuNames);
-      viewOnlyChecked = false;
-      renderHistogram();
-    }
-
     function resetAllToDefault() {
-      // 1. Reset Reference CPUs to initial defaults (Intel Processor N150, AMD Ryzen 3 PRO 3200GE, Intel Core i5-1345U and Intel Pentium Silver N6000)
+      // 1. Reset Pinned CPUs to initial defaults (Intel Processor N150, AMD Ryzen 3 PRO 3200GE, Intel Core i5-1345U and Intel Pentium Silver N6000)
       referenceCpuNames = new Set(["Intel Processor N150", "AMD Ryzen 3 PRO 3200GE", "Intel Core i5-1345U", "Intel Pentium Silver N6000"]);
       updateReferenceUI();
 
-      // 2. Reset selection checkboxes (all CPUs checked)
-      checkedCpuNames = new Set(cpuData.map(c => c.name));
-      viewOnlyChecked = false;
+      // 2. Reset view mode & compare mode
+      viewMode = "all";
+      activeCompareCpu = null;
 
       // 3. Reset filter toggles (Brand, Power, Win11, RAM)
       selFilterBrand = "all";
@@ -1339,6 +1329,9 @@
     }
 
     function toggleSelectionFilter(type) {
+      // Clear compare mode when switching category filters
+      activeCompareCpu = null;
+
       if (type === "intel") {
         selFilterBrand = (selFilterBrand === "intel") ? "all" : "intel";
       } else if (type === "amd") {
@@ -1356,7 +1349,7 @@
       }
 
       updateSelectionFilterButtons();
-      applySelectionFilters();
+      renderHistogram();
     }
 
     function updateSelectionFilterButtons() {
@@ -1368,63 +1361,18 @@
       const btnDdr4 = document.getElementById("btnSelDdr4");
       const btnDdr5 = document.getElementById("btnSelDdr5");
 
-      if (btnIntel) btnIntel.classList.toggle("active-intel", selFilterBrand === "intel");
-      if (btnAmd) btnAmd.classList.toggle("active-amd", selFilterBrand === "amd");
+      if (btnIntel) btnIntel.classList.toggle("active", selFilterBrand === "intel");
+      if (btnAmd) btnAmd.classList.toggle("active", selFilterBrand === "amd");
       if (btnLow) btnLow.classList.toggle("active-power-low", selFilterPower === "low");
       if (btnNormal) btnNormal.classList.toggle("active-power-normal", selFilterPower === "normal");
       if (btnW11) btnW11.classList.toggle("active-w11", selFilterW11);
       if (btnDdr4) btnDdr4.classList.toggle("active-ddr4", selFilterDdr4);
       if (btnDdr5) btnDdr5.classList.toggle("active-ddr5", selFilterDdr5);
-    }
 
-    function applySelectionFilters() {
-      if (selFilterBrand === "all" && selFilterPower === "all" && !selFilterW11 && !selFilterDdr4 && !selFilterDdr5) {
-        checkedCpuNames = new Set(cpuData.map(c => c.name));
-      } else {
-        checkedCpuNames = new Set(referenceCpuNames);
-        cpuData.forEach(cpu => {
-          if (selFilterBrand === "intel" && !cpu.name.toLowerCase().startsWith("intel")) return;
-          if (selFilterBrand === "amd" && !cpu.name.toLowerCase().startsWith("amd")) return;
-          if (selFilterPower === "low" && cpu.tdp > 15) return;
-          if (selFilterPower === "normal" && cpu.tdp <= 15) return;
-          if (selFilterW11 && !cpu.win11) return;
-
-          if (selFilterDdr4 || selFilterDdr5) {
-            const hasDdr4 = cpu.ram && cpu.ram.includes("DDR4");
-            const hasDdr5 = cpu.ram && cpu.ram.includes("DDR5");
-            let ramMatch = false;
-            if (selFilterDdr4 && hasDdr4) ramMatch = true;
-            if (selFilterDdr5 && hasDdr5) ramMatch = true;
-            if (!ramMatch) return;
-          }
-
-          checkedCpuNames.add(cpu.name);
-        });
-      }
-
-      viewOnlyChecked = false;
-      renderHistogram();
-    }
-
-    function toggleViewOnlyChecked() {
-      viewOnlyChecked = !viewOnlyChecked;
-      renderHistogram();
-    }
-
-    function toggleRowCheck(cpuName, event) {
-      if (referenceCpuNames.has(cpuName)) return;
-
-      if (event && event.altKey) {
-        // Alt+Click isolates this CPU with all Reference CPUs
-        checkedCpuNames = new Set([...referenceCpuNames, cpuName]);
-      } else {
-        if (checkedCpuNames.has(cpuName)) {
-          checkedCpuNames.delete(cpuName);
-        } else {
-          checkedCpuNames.add(cpuName);
-        }
-      }
-      renderHistogram();
+      const btnAll = document.getElementById("btnViewAll");
+      const btnPinned = document.getElementById("btnViewPinned");
+      if (btnAll) btnAll.classList.toggle("active", viewMode === "all" && !activeCompareCpu);
+      if (btnPinned) btnPinned.classList.toggle("active", viewMode === "pinnedOnly" && !activeCompareCpu);
     }
 
     function handleCheckboxChange() {
@@ -1477,6 +1425,7 @@
         const card = document.getElementById("card-" + m);
         const tag = document.getElementById("tag-" + m);
         const chk = document.getElementById("chk-" + m);
+        if (!card || !tag || !chk) return;
 
         card.className = "benchmark-card";
         if (!chk.checked) {
@@ -1494,23 +1443,55 @@
     }
 
     function getFilteredAndSortedData() {
-      const filterText = document.getElementById("filterInput").value.trim().toLowerCase();
+      const filterInput = document.getElementById("filterInput");
+      const filterText = filterInput ? filterInput.value.trim().toLowerCase() : "";
 
       let result = cpuData.filter(item => {
-        // Reference CPUs are PERMANENTLY kept visible
-        if (referenceCpuNames.has(item.name)) return true;
+        const isPinned = referenceCpuNames.has(item.name);
 
-        // In isolated view mode, only show checked CPUs
-        if (viewOnlyChecked && !checkedCpuNames.has(item.name)) return false;
+        // 1. Compare Mode: show ONLY pinned baselines + target compared model
+        if (activeCompareCpu) {
+          return isPinned || item.name === activeCompareCpu;
+        }
 
-        // Text filter
+        // 2. Pinned Only Mode: show only pinned baselines
+        if (viewMode === "pinnedOnly") {
+          return isPinned;
+        }
+
+        // 3. Pinned models ALWAYS remain visible across any filter/search!
+        if (isPinned) return true;
+
+        // 4. Brand filter
+        if (selFilterBrand === "intel" && !item.name.toLowerCase().startsWith("intel")) return false;
+        if (selFilterBrand === "amd" && !item.name.toLowerCase().startsWith("amd")) return false;
+
+        // 5. Power filter
+        if (selFilterPower === "low" && item.tdp > 15) return false;
+        if (selFilterPower === "normal" && item.tdp <= 15) return false;
+
+        // 6. Windows 11 filter
+        if (selFilterW11 && !item.win11) return false;
+
+        // 7. RAM filters
+        if (selFilterDdr4 || selFilterDdr5) {
+          const hasDdr4 = item.ram && item.ram.includes("DDR4");
+          const hasDdr5 = item.ram && item.ram.includes("DDR5");
+          let ramMatch = false;
+          if (selFilterDdr4 && hasDdr4) ramMatch = true;
+          if (selFilterDdr5 && hasDdr5) ramMatch = true;
+          if (!ramMatch) return false;
+        }
+
+        // 8. Text search
         if (filterText && !item.name.toLowerCase().includes(filterText)) return false;
 
         return true;
       });
 
       // Sort
-      const sortVal = document.getElementById("sortSelect").value;
+      const sortSelect = document.getElementById("sortSelect");
+      const sortVal = sortSelect ? sortSelect.value : "passmark-asc";
       const [key, order] = sortVal.split("-");
 
       result.sort((a, b) => {
@@ -1541,42 +1522,59 @@
       const activeData = getFilteredAndSortedData();
       const totalCount = cpuData.length;
       const visibleCount = activeData.length;
-      const checkedCount = checkedCpuNames.size;
       const refCount = referenceCpuNames.size;
-      const customCount = Math.max(0, checkedCount - refCount);
+
+      // Update button active states and counts
+      updateSelectionFilterButtons();
+      const countAllEl = document.getElementById("countAll");
+      const countPinnedEl = document.getElementById("countPinned");
+      if (countAllEl) countAllEl.textContent = `(${totalCount})`;
+      if (countPinnedEl) countPinnedEl.textContent = `(${refCount})`;
+
+      // Compare banner
+      const compareBanner = document.getElementById("compareBanner");
+      const compareNameEl = document.getElementById("compareCpuName");
+      if (compareBanner && compareNameEl) {
+        if (activeCompareCpu) {
+          compareBanner.style.display = "inline-flex";
+          compareNameEl.textContent = activeCompareCpu;
+        } else {
+          compareBanner.style.display = "none";
+        }
+      }
 
       // Sort state
-      const sortVal = document.getElementById("sortSelect").value;
+      const sortSelect = document.getElementById("sortSelect");
+      const sortVal = sortSelect ? sortSelect.value : "passmark-asc";
       const [sortKey, sortOrder] = sortVal.split("-");
       updateSortKeyIndicators(sortKey, sortOrder);
 
       // Toolbar count info
-      document.getElementById("countInfo").textContent =
-        visibleCount === totalCount
-          ? `Showing all ${totalCount} CPUs (${refCount} references pinned)`
-          : `Showing ${visibleCount} of ${totalCount} CPUs (${refCount} references pinned)`;
-
-      // Selection Bar UI
-      const counter = document.getElementById("selectionCounter");
-      const applyBtn = document.getElementById("applyViewBtn");
-      if (viewOnlyChecked) {
-        counter.textContent = `Showing ${visibleCount} selected models (${refCount} References included)`;
-        applyBtn.innerHTML = "✏️ Edit Selection (Show All Rows)";
-        applyBtn.className = "apply-view-btn btn-mode-edit";
-        applyBtn.title = "Display all rows to check or uncheck models";
-      } else {
-        counter.textContent = `${checkedCount} of ${totalCount} models checked (${customCount} custom + ${refCount} Reference)`;
-        applyBtn.innerHTML = `👁️ Apply &amp; View (${checkedCount})`;
-        applyBtn.className = "apply-view-btn";
-        applyBtn.title = "Isolate and show only checked models on the chart";
+      const countInfoEl = document.getElementById("countInfo");
+      if (countInfoEl) {
+        if (activeCompareCpu) {
+          countInfoEl.textContent = `Comparing ${activeCompareCpu} vs ${refCount} Pinned Baselines`;
+        } else if (viewMode === "pinnedOnly") {
+          countInfoEl.textContent = `Showing ${refCount} Pinned Baselines`;
+        } else {
+          countInfoEl.textContent = (visibleCount === totalCount)
+            ? `Showing all ${totalCount} CPUs (${refCount} pinned)`
+            : `Showing ${visibleCount} of ${totalCount} CPUs (${refCount} pinned)`;
+        }
       }
 
       // Benchmark visibility
-      const showPassmark = document.getElementById("chk-passmark").checked;
-      const showCpuzMulti = document.getElementById("chk-cpuzMulti").checked;
-      const showCpuzSingle = document.getElementById("chk-cpuzSingle").checked;
-      const showGb6Multi = document.getElementById("chk-gb6Multi").checked;
-      const showGb6Single = document.getElementById("chk-gb6Single").checked;
+      const chkP = document.getElementById("chk-passmark");
+      const chkZM = document.getElementById("chk-cpuzMulti");
+      const chkZS = document.getElementById("chk-cpuzSingle");
+      const chkM = document.getElementById("chk-gb6Multi");
+      const chkS = document.getElementById("chk-gb6Single");
+
+      const showPassmark = chkP ? chkP.checked : true;
+      const showCpuzMulti = chkZM ? chkZM.checked : true;
+      const showCpuzSingle = chkZS ? chkZS.checked : true;
+      const showGb6Multi = chkM ? chkM.checked : true;
+      const showGb6Single = chkS ? chkS.checked : true;
 
       // Sync radio buttons
       const isSolo = (k) => {
@@ -1589,11 +1587,11 @@
         };
         return flags[k] && Object.keys(flags).every(key => key === k || !flags[key]);
       };
-      document.getElementById("radio-passmark").checked = isSolo("passmark");
-      document.getElementById("radio-cpuzMulti").checked = isSolo("cpuzMulti");
-      document.getElementById("radio-cpuzSingle").checked = isSolo("cpuzSingle");
-      document.getElementById("radio-gb6Multi").checked = isSolo("gb6Multi");
-      document.getElementById("radio-gb6Single").checked = isSolo("gb6Single");
+      if (document.getElementById("radio-passmark")) document.getElementById("radio-passmark").checked = isSolo("passmark");
+      if (document.getElementById("radio-cpuzMulti")) document.getElementById("radio-cpuzMulti").checked = isSolo("cpuzMulti");
+      if (document.getElementById("radio-cpuzSingle")) document.getElementById("radio-cpuzSingle").checked = isSolo("cpuzSingle");
+      if (document.getElementById("radio-gb6Multi")) document.getElementById("radio-gb6Multi").checked = isSolo("gb6Multi");
+      if (document.getElementById("radio-gb6Single")) document.getElementById("radio-gb6Single").checked = isSolo("gb6Single");
 
       // Lookup Reference CPU objects for relative percentage calculations
       const refObjects = cpuData.filter(c => referenceCpuNames.has(c.name));
@@ -1650,50 +1648,51 @@
 
       activeData.forEach(cpu => {
         const isRef = referenceCpuNames.has(cpu.name);
-        const isChecked = isRef || checkedCpuNames.has(cpu.name);
-        const isDimmed = !isChecked && !viewOnlyChecked;
+        const isComparingThis = (activeCompareCpu === cpu.name);
 
         const row = document.createElement("div");
-        row.className = `hist-row ${isRef ? 'row-reference' : ''} ${isDimmed ? 'row-dimmed' : ''}`;
+        row.className = `hist-row ${isRef ? 'row-reference' : ''} ${isComparingThis ? 'row-comparing' : ''}`;
         row.dataset.cpuName = cpu.name;
 
         // Left Label Column
         const labelArea = document.createElement("div");
         labelArea.className = "row-label";
 
-        const chk = document.createElement("input");
-        chk.type = "checkbox";
-        chk.className = "row-chk";
-        chk.checked = isChecked;
-        if (isRef) {
-          chk.disabled = true;
-          chk.title = "Reference CPU is permanently selected";
-        } else {
-          chk.title = isChecked ? `Click to uncheck (Alt+Click to isolate)` : `Click to check`;
-          chk.addEventListener("click", function(e) {
-            e.stopPropagation();
-            toggleRowCheck(cpu.name, e);
-          });
-        }
-        labelArea.appendChild(chk);
-
-        // Pin / Star Button
+        // Pin button
         const pinBtn = document.createElement("button");
         pinBtn.type = "button";
         pinBtn.className = `row-pin-btn ${isRef ? 'active' : ''}`;
-        pinBtn.innerHTML = isRef ? "★ Ref" : "☆ Ref";
-        pinBtn.title = isRef ? "Reference CPU (Click to remove from reference)" : "Click to pin as Reference CPU";
+        pinBtn.innerHTML = isRef ? "📌 Pinned" : "📌 Pin";
+        pinBtn.title = isRef ? "Pinned baseline CPU (Click to unpin)" : "Click to pin as comparison baseline";
         pinBtn.onclick = function(e) {
           e.stopPropagation();
           toggleReferenceCpu(cpu.name);
         };
         labelArea.appendChild(pinBtn);
 
+        // Vs Pinned button (for non-pinned CPUs)
+        if (!isRef) {
+          const compBtn = document.createElement("button");
+          compBtn.type = "button";
+          compBtn.className = `row-compare-btn ${isComparingThis ? 'active' : ''}`;
+          compBtn.innerHTML = isComparingThis ? "⚡ Comparing" : "⚡ Vs Pinned";
+          compBtn.title = isComparingThis ? "Exit comparison mode" : "Isolate and compare this model against all pinned baselines";
+          compBtn.onclick = function(e) {
+            e.stopPropagation();
+            if (isComparingThis) {
+              clearCompare();
+            } else {
+              setCompareCpu(cpu.name);
+            }
+          };
+          labelArea.appendChild(compBtn);
+        }
+
         // CPU Name
         const nameEl = document.createElement("span");
         nameEl.className = "row-name";
         nameEl.title = cpu.name;
-        nameEl.innerHTML = `${cpu.name} ${isRef ? '<span class="ref-badge">★ Ref</span>' : ''}`;
+        nameEl.innerHTML = `${cpu.name} ${isRef ? '<span class="ref-badge">📌 Pinned</span>' : ''}`;
         labelArea.appendChild(nameEl);
 
         // TDP / Power Consumption Badge
@@ -1736,11 +1735,11 @@
         });
         barsArea.appendChild(gridOverlay);
 
-        // Compute tooltips with diffs vs all reference CPUs
+        // Compute tooltips with diffs vs all pinned reference CPUs
         function makeTooltip(metricName, score, metricKey) {
           const lines = [`${cpu.name} - ${metricName}: ${score.toLocaleString()}`];
           if (isRef) {
-            lines.push("★ Reference CPU baseline");
+            lines.push("📌 Pinned baseline CPU");
           } else if (refObjects.length > 0) {
             const diffs = refObjects.map(ref => {
               const refScore = ref[metricKey];
@@ -1860,7 +1859,7 @@
       });
     }
 
-    // Toast Notification helper
+        // Toast Notification helper
     let toastTimeout = null;
     function showToast(message, type = "info") {
       let toast = document.getElementById("clipboardToast");
@@ -1975,39 +1974,8 @@
       const matchedNames = matchedCpus.map(c => c.name);
 
       // Select matched CPUs while preserving all Reference CPUs
-      checkedCpuNames = new Set([...referenceCpuNames, ...matchedNames]);
-
-      // Reset brand, power, and hardware filter states to allow matched CPUs to display cleanly
-      selFilterBrand = "all";
-      selFilterPower = "all";
-      selFilterW11 = false;
-      selFilterDdr4 = false;
-      selFilterDdr5 = false;
-      updateSelectionFilterButtons();
-
-      activeMatchQuery = text;
-      activeMatchResult = matchedNames;
-
-      // Update match indicator badge in filters area
-      const matchBadge = document.getElementById("matchFilterBadge");
-      const matchQueryDisplay = document.getElementById("matchQueryDisplay");
-      const matchTargetDisplay = document.getElementById("matchTargetDisplay");
-      if (matchBadge && matchQueryDisplay && matchTargetDisplay) {
-        matchQueryDisplay.textContent = `"${text.length > 25 ? text.slice(0, 22) + '...' : text}"`;
-        matchQueryDisplay.title = `Full text used for matching: "${text}"`;
-        matchTargetDisplay.textContent = matchedNames.map(n => n.replace(/^(Intel|AMD)\s+/, '')).join(', ');
-        matchBadge.style.display = "inline-flex";
-      }
-
-      const filterInput = document.getElementById("filterInput");
-      if (matchedNames.length === 1) {
-        if (filterInput) filterInput.value = matchedNames[0];
-        viewOnlyChecked = false;
-      } else {
-        if (filterInput) filterInput.value = "";
-        viewOnlyChecked = true;
-      }
-
+      // Isolate matched CPU in compare mode vs pinned baselines
+      setCompareCpu(bestMatch.name);
       renderHistogram();
 
       // Smooth scroll to the first matched CPU and highlight
