@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -1010,44 +1010,63 @@
     </div>
   </div>
 
-  <!-- In-histogram selection bar: batch actions + text filter + live counter + Apply & View -->
+  <!-- Clean Filter & View Controls -->
   <div class="selection-bar" id="selectionBar">
     <div class="selection-bar-left">
-      <span class="selection-bar-title">Selection:</span>
-      <button type="button" class="sel-btn" onclick="selectAllCpus()">Select All</button>
-      <button type="button" class="sel-btn" onclick="deselectAllCpus()">Deselect All (Keep Refs)</button>
-      <button type="button" class="sel-btn" id="btnSelIntel" onclick="toggleSelectionFilter('intel')" title="Toggle Intel only filter (can be combined with other filters)">Intel only</button>
-      <button type="button" class="sel-btn" id="btnSelAmd" onclick="toggleSelectionFilter('amd')" title="Toggle AMD only filter (can be combined with other filters)">AMD only</button>
-      <button type="button" class="sel-btn" id="btnSelLowPower" onclick="toggleSelectionFilter('lowPower')" title="Filter Low Power CPUs (≤ 15W TDP, can be combined with other filters)">⚡ Low Power</button>
-      <button type="button" class="sel-btn" id="btnSelNormalPower" onclick="toggleSelectionFilter('normalPower')" title="Filter Normal Power CPUs (> 15W TDP, can be combined with other filters)">⚡ Normal Power</button>
-      <button type="button" class="sel-btn" id="btnSelW11" onclick="toggleSelectionFilter('w11')" title="Toggle Windows 11 filter (can be combined with other filters)">✓ W11 only</button>
-      <button type="button" class="sel-btn" id="btnSelDdr4" onclick="toggleSelectionFilter('ddr4')" title="Toggle DDR4 filter (can be combined with other filters)">DDR4</button>
-      <button type="button" class="sel-btn" id="btnSelDdr5" onclick="toggleSelectionFilter('ddr5')" title="Toggle DDR5 filter (can be combined with other filters)">DDR5</button>
-
-      <div class="selection-search-group">
-        <label for="filterInput" class="selection-search-label">Filter:</label>
-        <input type="text" id="filterInput" class="selection-search-input" placeholder="Search by name..." oninput="renderHistogram()">
-        <button class="clear-btn" type="button" onclick="clearFilter()">Clear</button>
+      <!-- View mode toggles -->
+      <div class="view-mode-group">
+        <button type="button" class="view-mode-btn active" id="btnViewAll" onclick="setViewMode('all')">
+          All CPUs <span class="view-count" id="countAll"></span>
+        </button>
+        <button type="button" class="view-mode-btn btn-pinned-only" id="btnViewPinned" onclick="setViewMode('pinnedOnly')" title="Display only pinned baselines">
+          📌 Pinned Only <span class="view-count" id="countPinned"></span>
+        </button>
       </div>
 
-      <!-- Match Filter Indicator and Clear Button -->
+      <div class="filter-divider"></div>
+
+      <!-- Live filter pills -->
+      <div class="filter-pills-group">
+        <button type="button" class="filter-pill" id="btnSelIntel" onclick="toggleSelectionFilter('intel')" title="Filter Intel CPUs">Intel</button>
+        <button type="button" class="filter-pill" id="btnSelAmd" onclick="toggleSelectionFilter('amd')" title="Filter AMD CPUs">AMD</button>
+        <button type="button" class="filter-pill" id="btnSelLowPower" onclick="toggleSelectionFilter('lowPower')" title="Low Power CPUs (≤15W TDP)">⚡ ≤15W</button>
+        <button type="button" class="filter-pill" id="btnSelNormalPower" onclick="toggleSelectionFilter('normalPower')" title="Standard Power (>15W TDP)">⚡ &gt;15W</button>
+        <button type="button" class="filter-pill" id="btnSelW11" onclick="toggleSelectionFilter('w11')" title="Officially supported on Windows 11">✓ Win11</button>
+        <button type="button" class="filter-pill" id="btnSelDdr4" onclick="toggleSelectionFilter('ddr4')" title="DDR4 memory support">DDR4</button>
+        <button type="button" class="filter-pill" id="btnSelDdr5" onclick="toggleSelectionFilter('ddr5')" title="DDR5 memory support">DDR5</button>
+      </div>
+
+      <div class="filter-divider"></div>
+
+      <!-- Live search input -->
+      <div class="selection-search-group">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="filterInput" class="selection-search-input" placeholder="Search CPU..." oninput="renderHistogram()">
+        <button class="clear-btn" type="button" onclick="clearFilter()" title="Clear search">✕</button>
+      </div>
+
+      <!-- Active Compare Banner -->
+      <div class="compare-banner" id="compareBanner" style="display: none;">
+        <span>Comparing:</span>
+        <strong id="compareCpuName"></strong>
+        <span>vs Pinned</span>
+        <button type="button" class="compare-close-btn" onclick="clearCompare()" title="Exit compare mode">✕ Show All</button>
+      </div>
+
+      <!-- Match Filter Indicator from clipboard -->
       <div class="match-filter-badge" id="matchFilterBadge" style="display: none;">
         <span class="match-icon">📋</span>
         <span class="match-label">Match:</span>
         <span class="match-query" id="matchQueryDisplay" title="Original text from clipboard"></span>
         <span class="match-arrow">➔</span>
         <span class="match-target" id="matchTargetDisplay" title="Matched processor(s)"></span>
-        <button type="button" class="match-clear-btn" onclick="clearMatchFilter()" title="Clear match filter and restore view">✕ Clear Match</button>
+        <button type="button" class="match-clear-btn" onclick="clearMatchFilter()" title="Clear match filter and restore view">✕</button>
       </div>
-
-      <span class="selection-counter" id="selectionCounter"></span>
     </div>
+
     <div class="selection-bar-right">
-      <button type="button" class="reset-all-btn" onclick="resetAllToDefault()" title="Reset all filters, sorting, references, and selection to initial default view">
+      <button type="button" class="reset-all-btn" onclick="resetAllToDefault()" title="Reset all filters, sorting, view mode, and pinned models">
         🔄 Reset All
-      </button>
-      <button type="button" class="apply-view-btn" id="applyViewBtn" onclick="toggleViewOnlyChecked()">
-        👁️ Apply &amp; View
       </button>
     </div>
   </div>
