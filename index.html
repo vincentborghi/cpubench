@@ -902,10 +902,10 @@
       <div class="toolbar-group">
         <label for="sortSelect">Sort by:</label>
         <select id="sortSelect" onchange="renderHistogram()">
-          <option value="gb6Single-asc" selected>Geekbench 6 Single (Ascending)</option>
-          <option value="gb6Single-desc">Geekbench 6 Single (Descending)</option>
-          <option value="passmark-asc">PassMark Multi (Ascending)</option>
+          <option value="passmark-asc" selected>PassMark Multi (Ascending)</option>
           <option value="passmark-desc">PassMark Multi (Descending)</option>
+          <option value="gb6Single-asc">Geekbench 6 Single (Ascending)</option>
+          <option value="gb6Single-desc">Geekbench 6 Single (Descending)</option>
           <option value="gb6Multi-asc">Geekbench 6 Multi (Ascending)</option>
           <option value="gb6Multi-desc">Geekbench 6 Multi (Descending)</option>
           <option value="tdp-asc">Power Consumption / TDP (Lowest to Highest)</option>
@@ -1262,9 +1262,9 @@
       const matchBadge = document.getElementById("matchFilterBadge");
       if (matchBadge) matchBadge.style.display = "none";
 
-      // 6. Reset sort to default (Geekbench 6 Single Ascending)
+      // 6. Reset sort to default (PassMark Multi Ascending)
       const sortSelect = document.getElementById("sortSelect");
-      if (sortSelect) sortSelect.value = "gb6Single-asc";
+      if (sortSelect) sortSelect.value = "passmark-asc";
 
       // 7. Reset benchmark checkboxes (all 3 metrics enabled)
       const chkP = document.getElementById("chk-passmark");
