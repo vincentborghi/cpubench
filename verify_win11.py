@@ -51,8 +51,8 @@ def is_intel_cpu_supported(name):
     # Supported Intel CPUs
     if "N4505" in name:
         return True, "Jasper Lake Celeron (supported)"
-    if "N5030" in name:
-        return True, "Gemini Lake Refresh Pentium Silver (supported)"
+    if any(k in name for k in ["N5030", "N6000"]):
+        return True, "Jasper Lake / Gemini Lake Refresh Pentium Silver (supported)"
     if "8210Y" in name:
         return True, "8th Gen Amber Lake Y (supported)"
     if any(k in name for k in ["8250U", "8350U", "8565U"]):

@@ -1086,7 +1086,8 @@
       { name: "Intel Pentium Silver N5030", passmark: 2600, cpuzMulti: 790, cpuzSingle: 210, gb6Multi: 1600, gb6Single: 480, tdp: 6, win11: true, ram: ["DDR4"], ramDesc: "DDR4-2400 / LPDDR4-2400 (Dual Channel)"  }
       { name: "Intel Core i5-4310U", passmark: 2650, cpuzMulti: 700, cpuzSingle: 290, gb6Multi: 1550, gb6Single: 860, tdp: 15, win11: false, ram: ["DDR3"], ramDesc: "DDR3L-1600 / LPDDR3-1600 (Dual Channel)"  }
       { name: "Intel Core i5-8210Y", passmark: 2700, cpuzMulti: 780, cpuzSingle: 330, gb6Multi: 1700, gb6Single: 800, tdp: 7, win11: true, ram: ["DDR3"], ramDesc: "LPDDR3-2133 (Dual Channel)"  }
-      { name: "Intel Core i5-7Y54", passmark: 2890, cpuzMulti: 710, cpuzSingle: 295, gb6Multi: 1700, gb6Single: 900, tdp: 4.5, win11: false, ram: ["DDR3"], ramDesc: "LPDDR3-1866 / DDR3L-1600 (Dual Channel)"  }
+      { name: "Intel Core i5-7Y54", passmark: 2890, cpuzMulti: 710, cpuzSingle: 295, gb6Multi: 1700, gb6Single: 900, tdp: 4.5, win11: false, ram: ["DDR3"], ramDesc: "LPDDR3-1866 / DDR3L-1600 (Dual Channel)" },
+      { name: "Intel Pentium Silver N6000", passmark: 3120, cpuzMulti: 890, cpuzSingle: 235, gb6Multi: 1650, gb6Single: 600, tdp: 6, win11: true, ram: ["DDR4"], ramDesc: "DDR4-2933 / LPDDR4x-2933 (Dual Channel)" },
       { name: "Intel Core i3-10110U", passmark: 3600, cpuzMulti: 1020, cpuzSingle: 410, gb6Multi: 2200, gb6Single: 1050, tdp: 15, win11: true, ram: ["DDR4"], ramDesc: "DDR4-2666 / LPDDR4-2933 (Dual Channel)"  }
       { name: "Intel Core i5-2320", passmark: 3700, cpuzMulti: 1100, cpuzSingle: 290, gb6Multi: 1750, gb6Single: 570, tdp: 95, win11: false, ram: ["DDR3"], ramDesc: "DDR3-1066 / DDR3-1333 (Dual Channel)"  }
       { name: "AMD Ryzen 3 3200U", passmark: 3700, cpuzMulti: 910, cpuzSingle: 340, gb6Multi: 1950, gb6Single: 940, tdp: 15, win11: true, ram: ["DDR4"], ramDesc: "DDR4-2400 (Dual Channel)"  }
@@ -1146,8 +1147,8 @@
       { name: "Intel Core Ultra X9 388H", passmark: 37000, cpuzMulti: 9100, cpuzSingle: 840, gb6Multi: 17000, gb6Single: 3000, tdp: 45, win11: true, ram: ["DDR5"], ramDesc: "DDR5 / LPDDR5x (Dual Channel)"  }
     ];
 
-    // Reference CPUs: default to Intel Processor N150, AMD Ryzen 3 PRO 3200GE and Intel Core i5-1345U
-    let referenceCpuNames = new Set(["Intel Processor N150", "AMD Ryzen 3 PRO 3200GE", "Intel Core i5-1345U"]);
+    // Reference CPUs: default to Intel Processor N150, AMD Ryzen 3 PRO 3200GE, Intel Core i5-1345U and Intel Pentium Silver N6000
+    let referenceCpuNames = new Set(["Intel Processor N150", "AMD Ryzen 3 PRO 3200GE", "Intel Core i5-1345U", "Intel Pentium Silver N6000"]);
 
     // Set of checked CPU names (all checked by default, references always included)
     let checkedCpuNames = new Set(cpuData.map(c => c.name));
@@ -1288,8 +1289,8 @@
     }
 
     function resetAllToDefault() {
-      // 1. Reset Reference CPUs to initial defaults (Intel Processor N150, AMD Ryzen 3 PRO 3200GE and Intel Core i5-1345U)
-      referenceCpuNames = new Set(["Intel Processor N150", "AMD Ryzen 3 PRO 3200GE", "Intel Core i5-1345U"]);
+      // 1. Reset Reference CPUs to initial defaults (Intel Processor N150, AMD Ryzen 3 PRO 3200GE, Intel Core i5-1345U and Intel Pentium Silver N6000)
+      referenceCpuNames = new Set(["Intel Processor N150", "AMD Ryzen 3 PRO 3200GE", "Intel Core i5-1345U", "Intel Pentium Silver N6000"]);
       updateReferenceUI();
 
       // 2. Reset selection checkboxes (all CPUs checked)
