@@ -818,17 +818,32 @@
       font-size: 0.88rem;
       font-weight: 700;
       box-shadow: 0 4px 14px rgba(2, 132, 199, 0.4), 0 2px 6px rgba(0, 0, 0, 0.15);
-      cursor: pointer;
-      transition: all 0.2s ease;
+      cursor: grab;
+      transition: background 0.2s ease, box-shadow 0.2s ease;
       user-select: none;
+      touch-action: none;
     }
     .floating-clipboard-btn:hover {
       background: #0369a1;
       box-shadow: 0 6px 18px rgba(2, 132, 199, 0.55), 0 3px 8px rgba(0, 0, 0, 0.2);
-      transform: translateY(-2px);
     }
-    .floating-clipboard-btn:active {
-      transform: translateY(0);
+    .floating-clipboard-btn.dragging {
+      cursor: grabbing;
+      opacity: 0.92;
+      box-shadow: 0 8px 24px rgba(2, 132, 199, 0.6), 0 4px 12px rgba(0, 0, 0, 0.25);
+      transition: none;
+    }
+    .floating-clipboard-btn .btn-drag-handle {
+      display: inline-flex;
+      align-items: center;
+      opacity: 0.75;
+      font-size: 1rem;
+      margin-right: -2px;
+      cursor: grab;
+      user-select: none;
+    }
+    .floating-clipboard-btn.dragging .btn-drag-handle {
+      cursor: grabbing;
     }
     .floating-clipboard-btn .btn-icon {
       font-size: 1.1rem;
@@ -1905,13 +1920,151 @@
       }
     }
 
+    // Make Floating Clipboard Button Draggable
+    function initDraggableClipboardBtn() {
+      const btn = document.getElementById("floatingClipboardBtn");
+      if (!btn) return;
+
+      let isDragging = false;
+      let hasDragged = false;
+      let startX = 0;
+      let startY = 0;
+      let initialLeft = 0;
+      let initialTop = 0;
+      const dragThreshold = 5;
+
+      // Restore saved position if available
+      try {
+        const savedPos = localStorage.getItem("cpubench_clipboard_btn_pos");
+        if (savedPos) {
+          const pos = JSON.parse(savedPos);
+          if (typeof pos.left === "number" && typeof pos.top === "number") {
+            const pad = 12;
+            const maxLeft = Math.max(pad, window.innerWidth - 220);
+            const maxTop = Math.max(pad, window.innerHeight - 60);
+            const clampLeft = Math.min(Math.max(pad, pos.left), maxLeft);
+            const clampTop = Math.min(Math.max(pad, pos.top), maxTop);
+            btn.style.left = clampLeft + "px";
+            btn.style.top = clampTop + "px";
+            btn.style.right = "auto";
+            btn.style.bottom = "auto";
+          }
+        }
+      } catch (err) {
+        // LocalStorage access fallback
+      }
+
+      function onPointerDown(e) {
+        if (e.type === "mousedown" && e.button !== 0) return;
+
+        isDragging = true;
+        hasDragged = false;
+
+        const clientX = e.type.startsWith("touch") ? e.touches[0].clientX : e.clientX;
+        const clientY = e.type.startsWith("touch") ? e.touches[0].clientY : e.clientY;
+
+        startX = clientX;
+        startY = clientY;
+
+        const rect = btn.getBoundingClientRect();
+        initialLeft = rect.left;
+        initialTop = rect.top;
+
+        btn.classList.add("dragging");
+
+        window.addEventListener("mousemove", onPointerMove, { passive: false });
+        window.addEventListener("mouseup", onPointerUp);
+        window.addEventListener("touchmove", onPointerMove, { passive: false });
+        window.addEventListener("touchend", onPointerUp);
+      }
+
+      function onPointerMove(e) {
+        if (!isDragging) return;
+
+        const clientX = e.type.startsWith("touch") ? e.touches[0].clientX : e.clientX;
+        const clientY = e.type.startsWith("touch") ? e.touches[0].clientY : e.clientY;
+
+        const deltaX = clientX - startX;
+        const deltaY = clientY - startY;
+
+        if (!hasDragged && Math.hypot(deltaX, deltaY) > dragThreshold) {
+          hasDragged = true;
+        }
+
+        if (hasDragged) {
+          if (e.cancelable) e.preventDefault();
+
+          let newLeft = initialLeft + deltaX;
+          let newTop = initialTop + deltaY;
+
+          const pad = 8;
+          const maxLeft = Math.max(pad, window.innerWidth - btn.offsetWidth - pad);
+          const maxTop = Math.max(pad, window.innerHeight - btn.offsetHeight - pad);
+
+          newLeft = Math.max(pad, Math.min(newLeft, maxLeft));
+          newTop = Math.max(pad, Math.min(newTop, maxTop));
+
+          btn.style.left = newLeft + "px";
+          btn.style.top = newTop + "px";
+          btn.style.right = "auto";
+          btn.style.bottom = "auto";
+        }
+      }
+
+      function onPointerUp() {
+        if (!isDragging) return;
+        isDragging = false;
+        btn.classList.remove("dragging");
+
+        window.removeEventListener("mousemove", onPointerMove);
+        window.removeEventListener("mouseup", onPointerUp);
+        window.removeEventListener("touchmove", onPointerMove);
+        window.removeEventListener("touchend", onPointerUp);
+
+        if (hasDragged) {
+          try {
+            const rect = btn.getBoundingClientRect();
+            localStorage.setItem("cpubench_clipboard_btn_pos", JSON.stringify({
+              left: Math.round(rect.left),
+              top: Math.round(rect.top)
+            }));
+          } catch (err) {}
+        }
+      }
+
+      btn.addEventListener("mousedown", onPointerDown);
+      btn.addEventListener("touchstart", onPointerDown, { passive: true });
+
+      // Prevent triggering click handler when dragged
+      btn.addEventListener("click", function(e) {
+        if (hasDragged) {
+          e.stopPropagation();
+          e.preventDefault();
+        }
+      }, true);
+
+      // Keep button in view on window resize
+      window.addEventListener("resize", function() {
+        if (btn.style.left && btn.style.top) {
+          const pad = 8;
+          const rect = btn.getBoundingClientRect();
+          const maxLeft = Math.max(pad, window.innerWidth - btn.offsetWidth - pad);
+          const maxTop = Math.max(pad, window.innerHeight - btn.offsetHeight - pad);
+          if (rect.left > maxLeft) btn.style.left = maxLeft + "px";
+          if (rect.top > maxTop) btn.style.top = maxTop + "px";
+        }
+      });
+    }
+
     // Initialize UI and render on load
     updateReferenceUI();
     renderHistogram();
+    initDraggableClipboardBtn();
   </script>
 
-  <!-- Floating Clipboard Match Button (always visible on screen) -->
-  <button type="button" class="floating-clipboard-btn" id="floatingClipboardBtn" onclick="handleClipboardMatch()" title="Paste text from clipboard and match/filter CPU">
+  <!-- Floating Clipboard Match Button (draggable) -->
+  <button type="button" class="floating-clipboard-btn" id="floatingClipboardBtn" onclick="handleClipboardMatch()" title="Paste text from clipboard and match/filter CPU (Drag to move)">
+    <span class="btn-drag-handle" title="Drag to move">⠿</span>
     <span class="btn-icon">📋</span>
     <span class="btn-text">Match from Clipboard</span>
   </button>
