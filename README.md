@@ -7,6 +7,8 @@ Interactive CPU benchmark comparison chart for desktop and laptop processors (In
 - **Interactive charts** with custom bar visualizer.
 - **Metric switching**:
   - PassMark CPU Mark (Multi-Thread)
+  - CPU-Z Benchmark (Multi-Thread)
+  - CPU-Z Benchmark (Single-Thread)
   - Geekbench 6 (Multi-Core)
   - Geekbench 6 (Single-Core)
 - **Reference CPUs** comparison with dynamic percentage offsets.

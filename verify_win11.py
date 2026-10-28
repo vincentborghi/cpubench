@@ -9,7 +9,7 @@ def parse_html_cpus(html_path):
     with open(html_path, "r", encoding="utf-8") as f:
         content = f.read()
 
-    pattern = r'{\s*name:\s*"([^"]+)",\s*passmark:\s*(\d+),\s*gb6Multi:\s*(\d+),\s*gb6Single:\s*(\d+),\s*win11:\s*(true|false)'
+    pattern = r'{\s*name:\s*"([^"]+)",\s*passmark:\s*(\d+),\s*gb6Multi:\s*(\d+),\s*gb6Single:\s*(\d+),.*?win11:\s*(true|false)'
     matches = re.findall(pattern, content)
     cpus = []
     for m in matches:
