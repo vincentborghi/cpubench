@@ -1017,6 +1017,13 @@
     </div>
   </div>
 
+  <!-- Floating Clipboard Match Button (draggable) -->
+  <button type="button" class="floating-clipboard-btn" id="floatingClipboardBtn" onclick="handleClipboardMatch()" title="Paste text from clipboard and match/filter CPU (Drag to move)">
+    <span class="btn-drag-handle" title="Drag to move">⠿</span>
+    <span class="btn-icon">📋</span>
+    <span class="btn-text">Match from Clipboard</span>
+  </button>
+
   <script>
     const cpuData = [
       { name: "Intel Celeron J3355", passmark: 1250, gb6Multi: 540, gb6Single: 300, tdp: 10, win11: false, ram: ["DDR3"], ramDesc: "DDR3L-1866 / LPDDR4-2400 (Dual Channel)" },
@@ -1925,6 +1932,9 @@
       const btn = document.getElementById("floatingClipboardBtn");
       if (!btn) return;
 
+      // Prevent native HTML5 drag interception
+      btn.ondragstart = function() { return false; };
+
       let isDragging = false;
       let hasDragged = false;
       let startX = 0;
@@ -1954,45 +1964,34 @@
         // LocalStorage access fallback
       }
 
-      function onPointerDown(e) {
-        if (e.type === "mousedown" && e.button !== 0) return;
+      btn.addEventListener("pointerdown", function(e) {
+        if (e.button !== 0) return; // Only primary mouse button or touch
 
         isDragging = true;
         hasDragged = false;
-
-        const clientX = e.type.startsWith("touch") ? e.touches[0].clientX : e.clientX;
-        const clientY = e.type.startsWith("touch") ? e.touches[0].clientY : e.clientY;
-
-        startX = clientX;
-        startY = clientY;
+        startX = e.clientX;
+        startY = e.clientY;
 
         const rect = btn.getBoundingClientRect();
         initialLeft = rect.left;
         initialTop = rect.top;
 
-        btn.classList.add("dragging");
+        btn.setPointerCapture(e.pointerId);
+      });
 
-        window.addEventListener("mousemove", onPointerMove, { passive: false });
-        window.addEventListener("mouseup", onPointerUp);
-        window.addEventListener("touchmove", onPointerMove, { passive: false });
-        window.addEventListener("touchend", onPointerUp);
-      }
-
-      function onPointerMove(e) {
+      btn.addEventListener("pointermove", function(e) {
         if (!isDragging) return;
 
-        const clientX = e.type.startsWith("touch") ? e.touches[0].clientX : e.clientX;
-        const clientY = e.type.startsWith("touch") ? e.touches[0].clientY : e.clientY;
-
-        const deltaX = clientX - startX;
-        const deltaY = clientY - startY;
+        const deltaX = e.clientX - startX;
+        const deltaY = e.clientY - startY;
 
         if (!hasDragged && Math.hypot(deltaX, deltaY) > dragThreshold) {
           hasDragged = true;
+          btn.classList.add("dragging");
         }
 
         if (hasDragged) {
-          if (e.cancelable) e.preventDefault();
+          e.preventDefault();
 
           let newLeft = initialLeft + deltaX;
           let newTop = initialTop + deltaY;
@@ -2009,17 +2008,16 @@
           btn.style.right = "auto";
           btn.style.bottom = "auto";
         }
-      }
+      });
 
-      function onPointerUp() {
+      function onPointerEnd(e) {
         if (!isDragging) return;
         isDragging = false;
         btn.classList.remove("dragging");
 
-        window.removeEventListener("mousemove", onPointerMove);
-        window.removeEventListener("mouseup", onPointerUp);
-        window.removeEventListener("touchmove", onPointerMove);
-        window.removeEventListener("touchend", onPointerUp);
+        try {
+          btn.releasePointerCapture(e.pointerId);
+        } catch (err) {}
 
         if (hasDragged) {
           try {
@@ -2032,8 +2030,8 @@
         }
       }
 
-      btn.addEventListener("mousedown", onPointerDown);
-      btn.addEventListener("touchstart", onPointerDown, { passive: true });
+      btn.addEventListener("pointerup", onPointerEnd);
+      btn.addEventListener("pointercancel", onPointerEnd);
 
       // Prevent triggering click handler when dragged
       btn.addEventListener("click", function(e) {
@@ -2061,12 +2059,5 @@
     renderHistogram();
     initDraggableClipboardBtn();
   </script>
-
-  <!-- Floating Clipboard Match Button (draggable) -->
-  <button type="button" class="floating-clipboard-btn" id="floatingClipboardBtn" onclick="handleClipboardMatch()" title="Paste text from clipboard and match/filter CPU (Drag to move)">
-    <span class="btn-drag-handle" title="Drag to move">⠿</span>
-    <span class="btn-icon">📋</span>
-    <span class="btn-text">Match from Clipboard</span>
-  </button>
 </body>
 </html>
