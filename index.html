@@ -1029,6 +1029,7 @@
       <div class="filter-pills-group">
         <button type="button" class="filter-pill" id="btnSelIntel" onclick="toggleSelectionFilter('intel')" title="Filter Intel CPUs">Intel</button>
         <button type="button" class="filter-pill" id="btnSelAmd" onclick="toggleSelectionFilter('amd')" title="Filter AMD CPUs">AMD</button>
+        <button type="button" class="filter-pill" id="btnSelArm" onclick="toggleSelectionFilter('arm')" title="Filter ARM / Qualcomm Snapdragon CPUs">ARM</button>
         <button type="button" class="filter-pill" id="btnSelLowPower" onclick="toggleSelectionFilter('lowPower')" title="Low Power CPUs (≤15W TDP)">⚡ ≤15W</button>
         <button type="button" class="filter-pill" id="btnSelNormalPower" onclick="toggleSelectionFilter('normalPower')" title="Standard Power (>15W TDP)">⚡ &gt;15W</button>
         <button type="button" class="filter-pill" id="btnSelW11" onclick="toggleSelectionFilter('w11')" title="Officially supported on Windows 11">✓ Win11</button>
@@ -1147,6 +1148,7 @@
       { name: "AMD Ryzen 5 5600U", passmark: 15500, cpuzMulti: 4100, cpuzSingle: 580, gb6Multi: 6500, gb6Single: 1400, tdp: 15, win11: true, ram: ["DDR4"], ramDesc: "DDR4-3200 / LPDDR4x-4266 (Dual Channel)"  },
       { name: "AMD Ryzen 5 7430U", passmark: 16000, cpuzMulti: 4150, cpuzSingle: 585, gb6Multi: 6700, gb6Single: 1900, tdp: 15, win11: true, ram: ["DDR4"], ramDesc: "DDR4-3200 (Dual Channel)"  },
       { name: "AMD Ryzen 5 7530U", passmark: 16200, cpuzMulti: 4200, cpuzSingle: 590, gb6Multi: 6200, gb6Single: 1900, tdp: 15, win11: true, ram: ["DDR4"], ramDesc: "DDR4-3200 (Dual Channel)"  },
+      { name: "Qualcomm Snapdragon X X1-26-100", passmark: 16250, cpuzMulti: 4615, cpuzSingle: 605, gb6Multi: 10400, gb6Single: 2120, tdp: 30, win11: true, ram: ["DDR5"], ramDesc: "LPDDR5x-8448 (Dual Channel)"  },
       { name: "Intel Core i5-12450H", passmark: 17100, cpuzMulti: 4800, cpuzSingle: 670, gb6Multi: 8600, gb6Single: 2250, tdp: 45, win11: true, ram: ["DDR4","DDR5"], ramDesc: "DDR4-3200 / DDR5-4800 / LPDDR5-5200 (Dual Channel)"  },
       { name: "Intel Core Ultra 5 125U", passmark: 17300, cpuzMulti: 4650, cpuzSingle: 705, gb6Multi: 9200, gb6Single: 2150, tdp: 15, win11: true, ram: ["DDR5"], ramDesc: "DDR5-5600 / LPDDR5x-7467 (Dual Channel)"  },
       { name: "AMD Ryzen 5 PRO 6650H", passmark: 18600, cpuzMulti: 4600, cpuzSingle: 605, gb6Multi: 8150, gb6Single: 1880, tdp: 45, win11: true, ram: ["DDR5"], ramDesc: "DDR5-4800 / LPDDR5-6400 (Dual Channel)"  },
@@ -1355,6 +1357,8 @@
         selFilterBrand = (selFilterBrand === "intel") ? "all" : "intel";
       } else if (type === "amd") {
         selFilterBrand = (selFilterBrand === "amd") ? "all" : "amd";
+      } else if (type === "arm") {
+        selFilterBrand = (selFilterBrand === "arm") ? "all" : "arm";
       } else if (type === "lowPower") {
         selFilterPower = (selFilterPower === "low") ? "all" : "low";
       } else if (type === "normalPower") {
@@ -1374,6 +1378,7 @@
     function updateSelectionFilterButtons() {
       const btnIntel = document.getElementById("btnSelIntel");
       const btnAmd = document.getElementById("btnSelAmd");
+      const btnArm = document.getElementById("btnSelArm");
       const btnLow = document.getElementById("btnSelLowPower");
       const btnNormal = document.getElementById("btnSelNormalPower");
       const btnW11 = document.getElementById("btnSelW11");
@@ -1382,6 +1387,7 @@
 
       if (btnIntel) btnIntel.classList.toggle("active", selFilterBrand === "intel");
       if (btnAmd) btnAmd.classList.toggle("active", selFilterBrand === "amd");
+      if (btnArm) btnArm.classList.toggle("active", selFilterBrand === "arm");
       if (btnLow) btnLow.classList.toggle("active-power-low", selFilterPower === "low");
       if (btnNormal) btnNormal.classList.toggle("active-power-normal", selFilterPower === "normal");
       if (btnW11) btnW11.classList.toggle("active-w11", selFilterW11);
@@ -1484,6 +1490,7 @@
         // 4. Brand filter
         if (selFilterBrand === "intel" && !item.name.toLowerCase().startsWith("intel")) return false;
         if (selFilterBrand === "amd" && !item.name.toLowerCase().startsWith("amd")) return false;
+        if (selFilterBrand === "arm" && !(item.name.toLowerCase().includes("snapdragon") || item.name.toLowerCase().includes("qualcomm") || item.name.toLowerCase().includes("arm"))) return false;
 
         // 5. Power filter
         if (selFilterPower === "low" && item.tdp > 15) return false;
@@ -1938,7 +1945,7 @@
 
       // Word matches (brand, series, tiers)
       for (const cw of cpuWords) {
-        if (cw === "intel" || cw === "amd") {
+        if (cw === "intel" || cw === "amd" || cw === "qualcomm" || cw === "snapdragon") {
           if (clipWords.includes(cw)) score += 30;
         } else if (cw === "core" || cw === "ryzen" || cw === "processor" || cw === "celeron" || cw === "pentium") {
           if (clipWords.includes(cw)) score += 40;
@@ -1952,8 +1959,9 @@
       }
 
       // Brand mismatch penalty
-      if (cName.startsWith("intel") && clipWords.includes("amd")) score -= 150;
-      if (cName.startsWith("amd") && clipWords.includes("intel")) score -= 150;
+      if (cName.startsWith("intel") && (clipWords.includes("amd") || clipWords.includes("snapdragon") || clipWords.includes("qualcomm"))) score -= 150;
+      if (cName.startsWith("amd") && (clipWords.includes("intel") || clipWords.includes("snapdragon") || clipWords.includes("qualcomm"))) score -= 150;
+      if ((cName.includes("qualcomm") || cName.includes("snapdragon")) && (clipWords.includes("intel") || clipWords.includes("amd"))) score -= 150;
 
       // Tier mismatch penalty (e.g. user specified "i7" but this is "i5")
       const clipTiers = clipWords.filter(w => /^i[3579]$/.test(w));
@@ -1991,10 +1999,22 @@
       }
 
       const matchedNames = matchedCpus.map(c => c.name);
+      const bestMatch = matchedCpus[0];
 
       // Select matched CPUs while preserving all Reference CPUs
       // Isolate matched CPU in compare mode vs pinned baselines
-      setCompareCpu(bestMatch.name);
+      if (bestMatch) {
+        setCompareCpu(bestMatch.name);
+
+        const matchBadge = document.getElementById("matchFilterBadge");
+        const matchQueryDisplay = document.getElementById("matchQueryDisplay");
+        const matchTargetDisplay = document.getElementById("matchTargetDisplay");
+        if (matchBadge && matchQueryDisplay && matchTargetDisplay) {
+          matchQueryDisplay.textContent = text.slice(0, 24);
+          matchTargetDisplay.textContent = bestMatch.name;
+          matchBadge.style.display = "inline-flex";
+        }
+      }
       renderHistogram();
 
       // Smooth scroll to the first matched CPU and highlight
