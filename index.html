@@ -1072,8 +1072,8 @@
       { name: "Intel Core Ultra X9 388H", passmark: 37000, gb6Multi: 17000, gb6Single: 3000, tdp: 45, win11: true, ram: ["DDR5"], ramDesc: "DDR5 / LPDDR5x (Dual Channel)" }
     ];
 
-    // Reference CPUs: default to Intel Processor N150 and Intel Core i5-1345U
-    let referenceCpuNames = new Set(["Intel Processor N150", "Intel Core i5-1345U"]);
+    // Reference CPUs: default to Intel Processor N150, AMD Ryzen 3 PRO 3200GE and Intel Core i5-1345U
+    let referenceCpuNames = new Set(["Intel Processor N150", "AMD Ryzen 3 PRO 3200GE", "Intel Core i5-1345U"]);
 
     // Set of checked CPU names (all checked by default, references always included)
     let checkedCpuNames = new Set(cpuData.map(c => c.name));
@@ -1214,8 +1214,8 @@
     }
 
     function resetAllToDefault() {
-      // 1. Reset Reference CPUs to initial defaults (Intel Processor N150 and Intel Core i5-1345U)
-      referenceCpuNames = new Set(["Intel Processor N150", "Intel Core i5-1345U"]);
+      // 1. Reset Reference CPUs to initial defaults (Intel Processor N150, AMD Ryzen 3 PRO 3200GE and Intel Core i5-1345U)
+      referenceCpuNames = new Set(["Intel Processor N150", "AMD Ryzen 3 PRO 3200GE", "Intel Core i5-1345U"]);
       updateReferenceUI();
 
       // 2. Reset selection checkboxes (all CPUs checked)
